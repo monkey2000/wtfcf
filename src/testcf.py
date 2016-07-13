@@ -7,7 +7,7 @@ import re
 import colorama
 import ConfigParser
 import urllib3
-import subprocess
+import subprocess32 as subprocess
 import shutil
 import time
 from logger import *
@@ -47,14 +47,14 @@ def run_test():
         with open(SAMPLE_PATH + '/' + str(i) + '.in', 'r') as input_file, \
              open(TEMP_PATH + '/' + str(i) + '.ans', 'w') as answer_file:
             ret = None
-            proc = subprocess.Popen(BINARY_PATH, shell=True,
-                    stdin=input_file, stdout=answer_file)
-            time.sleep(sleep_time)
-            
-            ret = proc.poll()
+
+            try:
+                ret = subprocess.call(BINARY_PATH, shell=True,
+                        stdin=input_file, stdout=answer_file, timeout=sleep_time)
+            except subprocess.TimeoutExpired:
+                pass
             
             if ret == None:
-                proc.kill()
                 status = 'TLE'
             elif ret == 0:
                 ret = subprocess.call('diff --brief -w -B {0} {1}'.format(

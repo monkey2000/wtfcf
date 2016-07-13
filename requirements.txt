@@ -2,4 +2,5 @@ beautifulsoup4==4.4.1
 bs4==0.0.1
 colorama==0.3.7
 configparser==3.5.0
+subprocess32==3.2.7
 urllib3==1.16
