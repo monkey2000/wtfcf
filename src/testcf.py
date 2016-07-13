@@ -57,8 +57,7 @@ def run_test():
                 proc.kill()
                 status = 'TLE'
             elif ret == 0:
-                ret = subprocess.call('diff --brief --ignore-space-change ' + \
-                        '--ignore-blank-lines {0} {1}'.format(
+                ret = subprocess.call('diff --brief -w -B {0} {1}'.format(
                     TEMP_PATH + '/' + str(i) + '.ans',
                     SAMPLE_PATH + '/' + str(i) + '.out'
                 ), shell=True, stdout=DEVNULL)
