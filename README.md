@@ -9,7 +9,7 @@ cp ~/.wtfcf/example/wtfcf.ini ~/.wtfcf.ini
 pip install -r ~/.wtfcf/requirements.txt
 ```
 
-Then add `~/.wtfcf/bin` To your `$PATH`.
+Then add `~/.wtfcf/bin` to your `$PATH`.
 
 ## Getting Started
 To download a problem:
