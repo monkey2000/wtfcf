@@ -17,7 +17,7 @@ def generate_workspace(config, info):
     os.mkdir(ws_dir)
 
     if config:
-        template_file = os.path.abspath(config.get('wtf_cf', 'template_file'))
+        template_file = os.path.expandvars(config.get('wtf_cf', 'template_file'))
         shutil.copy(template_file, ws_dir + '/solution.' + config.get('wtf_cf', 'template_suffix'))
 
     os.mkdir(sample_dir)
