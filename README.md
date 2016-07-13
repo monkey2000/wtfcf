@@ -6,6 +6,7 @@ To install it:
 ```shell
 git clone https://github.com/monkey2000/wtfcf.git ~/.wtfcf
 cp ~/.wtfcf/example/wtfcf.ini ~/.wtfcf.ini
+pip install -r ~/.wtfcf/requirements.txt
 ```
 
 Then add `~/.wtfcf/bin` To your `$PATH`.
