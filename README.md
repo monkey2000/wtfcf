@@ -1,5 +1,6 @@
 #wtfcf
-> Still under heavy development.
+> Still under development.
+Currently, it only support C-family language.
 
 ## Installation
 To install it:
