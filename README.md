@@ -1,6 +1,7 @@
 #wtfcf
-> Still under development.
-Currently, it only support C-family language.
+> Disclaimer: there's no warranty of anything.
+
+Currently, it only supports C++.
 
 ## Installation
 To install it:
@@ -22,3 +23,7 @@ To test your program:
 ```shell
 testcf
 ```
+
+## Setting Up a Proxy
+Go and see `example/wtfcf.ini`.
+
