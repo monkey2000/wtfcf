@@ -29,6 +29,17 @@ def init_config():
     else:
         config.read(CONFIG_PATH)
 
+def init_proxy():
+    if config.has_option('proxy', 'type') and \
+            config.has_option('proxy', 'url'):
+        url = config.get('proxy', 'url')
+        if config.get('proxy', 'type') == 'http':
+            http = urllib3.ProxyManager(url)
+            info('HTTP Proxy on ' + url + ' attached. ')
+        elif config.get('proxy', 'type') == 'socks':
+            from urllib3.contrib.socks import SOCKSProxyManager
+            http = SOCKSProxyManager(config.get('proxy', 'url'))
+            info('Socks Proxy on ' + url + ' attached. ') 
 
 TIME_LIMIT_PATTERN = [
     (re.compile('(\d*) second'), lambda mat: int(mat[0]) * 1000)
@@ -86,28 +97,29 @@ def get_info(url):
 
 def print_info(info):
     print(colorama.Fore.BLUE + 'Problem ID: {}{}'.format(info['contest_id'], info['problem_id']))
-    print(colorama.Fore.MAGENTA + 'Time Limit for each test: {}'.format(info['time_limit']))
+    print(colorama.Fore.MAGENTA + 'Time Limit for each test: {}ms'.format(info['time_limit']))
     print(colorama.Fore.MAGENTA + 'Number of samples: {}'.format(len(info['test_samples'])))
 
 
 def main():
     colorama.init()
     init_config()
-    
+    init_proxy()
+
     if len(sys.argv) <= 1:
         fatal('Missing wtf parameter, should be a problem url on CF.')
 
     target = sys.argv[1]
 
-    info('Starting crawling ' + target)
+    info('Start crawling ' + target)
 
     data = get_info(target)
 
-    info('Crawling metadata successfully.')
+    info('Crawl metadata successfully.')
     print_info(data)
 
     generate_workspace(config, data)
-    info('Generating worksapce successfully.')
+    info('Generate worksapce successfully.')
     info('Enjoy! :D')
 
 if __name__ == '__main__':
